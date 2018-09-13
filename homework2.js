@@ -29,4 +29,4 @@ if(studentResult === bestResult){
 	console.log("I just don't know what to say");
 }
 
-console.log('Thank you for your time !');
+console.log('Thank you for your time !'); 
