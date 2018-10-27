@@ -1,7 +1,37 @@
 body{
-	font-family: sans-serif; 
+	font-family: sans-serif;
 }
 
-h1, p{ 
+h1{
+	color: greenyellow;
+}
+
+h1, p{
 	text-align: center;
+}
+
+#arrows{
+	color: red;
+}
+
+#canvasContainer{
+	display: flex; 
+	justify-content: center;
+}
+
+#gameOver{
+	width:900px; 
+	height: 500px; 
+	align-items:center; 
+	justify-content: center; 
+	background:rgba(0,0,0,0.8); 
+	position: absolute; 
+	left: 0; 
+	right: 0; 
+	margin: 0 auto; 
+	display:none;
+}
+
+#gameOver h2{
+	color: white;
 }
