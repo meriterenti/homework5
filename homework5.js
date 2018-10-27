@@ -1,8 +1,8 @@
 const canvas = document.getElementById('canvas');
 const context = canvas.getContext('2d');
 
-canvas.width = 700;
-canvas.height = 400;
+canvas.width = 900;
+canvas.height = 500;
 
 let play = true;
 
@@ -40,7 +40,7 @@ const update = function() {
 	this.y += this.yDelta;
 	if(this.x + this.width >= hero.x && this.x <= hero.x + hero.width && this.y + this.height >= hero.y && this.y <= hero.y + hero.height){
 		play = false;
-		document.getElementById("gameOver").style.display = 'block';
+		document.getElementById("gameOver").style.display = 'flex';
 		setTimeout(function(){window.location.reload()}, 5000)
 	}
 }
@@ -101,8 +101,9 @@ const loop = function() {
 	if(!play){
 		return false;
 	}
-	context.fillStyle = '#BDBDBD';
-	context.fillRect(0, 0, canvas.width, canvas.height);
+	const background = new Image();
+	background.src = 'images/bg.jpg';
+	context.drawImage(background, 0, 0, canvas.width, canvas.height);
 	hero.draw()
 	for(let v of enemies){
 		v.draw();
