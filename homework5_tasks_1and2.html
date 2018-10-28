@@ -1,0 +1,57 @@
+<canvas id='canvas' > </canvas>
+<script>
+const canvas = document.getElementById('canvas');
+const context = canvas.getContext('2d');
+
+canvas.width = 700;
+canvas.height = 400;
+
+const colorArray = ['#CDDC39', '#C2185B', '#757575', '#009688', '#757575', '#FFEB3B', '#E91E63', '#009688'];
+
+const rand = function(num) {
+	return Math.floor(Math.random() * num) + 1;
+};
+
+const plusOrMinus = function() {
+	return Math.random() < 0.5 ? -1 : 1;
+}
+
+const draw = function() {
+	context.fillStyle = this.color;
+	context.fillRect(this.x, this.y, this.width, this.height);
+};
+
+const update = function() {
+	this.xDelta = (this.x >= canvas.width -30 || this.x <= 0) ? this.xDelta *= -1 : this.xDelta;
+	this.yDelta = (this.y >= canvas.height -30 || this.y <= 0) ? this.yDelta *= -1 : this.yDelta;
+	this.x += this.xDelta;
+	this.y += this.yDelta;
+}
+
+const createBoxes = function(count, canvasWidth, canvasHeight) {
+	const enemies = [];
+	for(let i=0;i<count;++i){
+		const currentEnenmy = {width: 30, height: 30, xDelta: plusOrMinus(), yDelta: plusOrMinus()};
+		currentEnenmy.x = rand(canvas.width - currentEnenmy.width)
+		currentEnenmy.y = rand(canvas.height - currentEnenmy.height)
+		currentEnenmy.color = colorArray[rand(7)-1];
+		currentEnenmy.draw = draw
+		currentEnenmy.update = update
+		enemies[i] = currentEnenmy;
+	}
+	return enemies;
+}
+
+const enemies = createBoxes(10, canvas.width, canvas.height)
+const loop = function() {
+	context.fillStyle = '#BDBDBD';
+	context.fillRect(0, 0, canvas.width, canvas.height);
+	for(let v of enemies){
+		v.draw();
+		v.update();
+	}
+	requestAnimationFrame(loop);
+};
+
+loop();
+</script>
